@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:fake_store_lyqx/features/auth/data/models/login_response.dart';
+import 'package:fake_store_lyqx/features/auth/data/models/user.dart';
 import 'package:retrofit/error_logger.dart';
 import 'package:retrofit/http.dart';
 
@@ -11,4 +12,7 @@ abstract class AuthApiService {
 
   @POST('/auth/login')
   Future<LoginResponse> login(@Body() Map<String, dynamic> body);
+  
+  @GET('/users/{id}')
+  Future<User> getUser(@Path('id') int id);
 }
