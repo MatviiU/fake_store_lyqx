@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:fake_store_lyqx/features/auth/data/models/login_response.dart';
+import 'package:retrofit/error_logger.dart';
 import 'package:retrofit/http.dart';
 
 part 'auth_api_service.g.dart';
