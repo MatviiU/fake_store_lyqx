@@ -1,5 +1,6 @@
 import 'package:fake_store_lyqx/core/navigation/screen_names.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
 class WelcomeScreen extends StatelessWidget {
@@ -23,8 +24,11 @@ class WelcomeScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(height: 100),
+                const SizedBox(height: 250),
+                SvgPicture.asset('assets/logo/logo_icon.svg'),
+                const SizedBox(height: 10),
                 const Text('Fake Store', style: TextStyle(fontSize: 30)),
+                const SizedBox(height: 40),
                 SizedBox(
                   width: double.infinity,
                   height: 48,
