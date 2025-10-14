@@ -14,7 +14,7 @@ final class HomeLoading extends HomeState {}
 final class HomeLoaded extends HomeState {
   const HomeLoaded({required this.user, required this.products});
 
-  final List<Product> products;
+  final List<ProductEntity> products;
   final User user;
 
   @override

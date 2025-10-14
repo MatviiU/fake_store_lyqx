@@ -11,7 +11,9 @@ class User {
     required this.password,
   });
 
-  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+  factory User.fromJson(Map<String, dynamic> json) {
+    return _$UserFromJson(json);
+  }
 
   final int id;
   final String username;

@@ -1,6 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:fake_store_lyqx/features/auth/data/auth_repository.dart';
+import 'package:fake_store_lyqx/features/auth/data/models/user.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 
 part 'auth_state.dart';
 
@@ -22,11 +24,15 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     emit(AuthLoading());
 
     try {
-      final response = await _authRepository.login(
+      final result = await _authRepository.login(
         event.username,
         event.password,
       );
-      emit(AuthSuccess(token: response.token));
+      final token = result.token;
+      final decodedToken = JwtDecoder.decode(token);
+      final userId = decodedToken['sub'] as int;
+      final user = await _authRepository.getUser(userId);
+      emit(AuthSuccess(token: result.token, user: user));
     } catch (e) {
       emit(AuthFailure(message: e.toString()));
     }
