@@ -13,6 +13,7 @@ class HomeScreen extends StatelessWidget {
       builder: (context, state) {
         return switch (state) {
           HomeLoaded() => Scaffold(
+            extendBody: true,
             body: SafeArea(
               child: Padding(
                 padding: const EdgeInsets.symmetric(
@@ -38,6 +39,52 @@ class HomeScreen extends StatelessWidget {
                   ],
                 ),
               ),
+            ),
+            bottomNavigationBar: BottomNavigationBar(
+              iconSize: 30,
+              showSelectedLabels: false,
+              showUnselectedLabels: false,
+              items: const [
+                BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.home_outlined,
+                    color: Color(0xFFCBCBD4),
+                    weight: 1.5,
+                  ),
+                  activeIcon: Icon(
+                    Icons.home_outlined,
+                    color: Colors.black,
+                    weight: 1.5,
+                  ),
+                  label: '',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.favorite_border_outlined,
+                    color: Color(0xFFCBCBD4),
+                    weight: 1.5,
+                  ),
+                  activeIcon: Icon(
+                    Icons.favorite_border_outlined,
+                    color: Colors.black,
+                    weight: 1.5,
+                  ),
+                  label: '',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.shopping_bag_outlined,
+                    color: Color(0xFFCBCBD4),
+                    weight: 1.5,
+                  ),
+                  activeIcon: Icon(
+                    Icons.shopping_bag_outlined,
+                    color: Colors.black,
+                    weight: 1.5,
+                  ),
+                  label: '',
+                ),
+              ],
             ),
           ),
           HomeInitial() ||
