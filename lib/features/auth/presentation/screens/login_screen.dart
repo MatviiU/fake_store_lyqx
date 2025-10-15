@@ -1,3 +1,4 @@
+import 'package:fake_store_lyqx/core/navigation/screen_names.dart';
 import 'package:fake_store_lyqx/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -67,7 +68,10 @@ class _LoginScreenState extends State<LoginScreen> {
             ScaffoldMessenger.of(
               context,
             ).showSnackBar(const SnackBar(content: Text('Login Successful!')));
-            // Navigate to the home screen
+            context.goNamed(
+              ScreenNames.home,
+              pathParameters: {'userId': state.user.id.toString()},
+            );
           } else if (state is AuthFailure) {
             ScaffoldMessenger.of(
               context,
