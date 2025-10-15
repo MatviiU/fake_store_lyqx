@@ -1,5 +1,7 @@
+import 'package:fake_store_lyqx/core/navigation/screen_names.dart';
 import 'package:fake_store_lyqx/features/home/data/models/product_entity.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class ProductListItem extends StatelessWidget {
   const ProductListItem({required this.product, super.key});
@@ -10,7 +12,11 @@ class ProductListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        //here must be product detail screen
+        context.pushNamed(
+          ScreenNames.productDetails,
+          extra: product,
+          pathParameters: {'productId': product.id.toString()},
+        );
       },
       borderRadius: BorderRadius.circular(12),
       child: Container(

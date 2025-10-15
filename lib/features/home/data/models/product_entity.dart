@@ -1,4 +1,3 @@
-
 import 'package:fake_store_lyqx/features/home/data/datasource/models/product_dto.dart';
 
 class ProductEntity {
@@ -9,9 +8,11 @@ class ProductEntity {
     required this.price,
     required this.count,
     required this.rate,
+    required this.description,
+    required this.category,
   });
 
-  factory ProductEntity.fromDto(ProductDto dto){
+  factory ProductEntity.fromDto(ProductDto dto) {
     return ProductEntity(
       id: dto.id,
       title: dto.title,
@@ -19,6 +20,8 @@ class ProductEntity {
       price: dto.price,
       count: dto.rating.count,
       rate: dto.rating.rate,
+      description: dto.description,
+      category: dto.category,
     );
   }
 
@@ -28,5 +31,6 @@ class ProductEntity {
   final double price;
   final int count;
   final double rate;
-
+  final String description;
+  final String category;
 }
