@@ -36,7 +36,6 @@ void setupLocator() {
     ..registerFactory<HomeBloc>(
       () => HomeBloc(
         productRepository: getIt<ProductRepository>(),
-        authRepository: getIt<AuthRepository>(),
       ),
     )
     ..registerFactory<ProductDetailsCubit>(
