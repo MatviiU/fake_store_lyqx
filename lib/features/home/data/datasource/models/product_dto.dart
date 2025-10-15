@@ -11,6 +11,8 @@ class ProductDto {
     required this.image,
     required this.price,
     required this.rating,
+    required this.description,
+    required this.category,
   });
 
   factory ProductDto.fromJson(Map<String, dynamic> json) =>
@@ -21,6 +23,9 @@ class ProductDto {
   final String image;
   final double price;
   final RatingDto rating;
+  final String description;
+  final String category;
+
 
   Map<String, dynamic> toJson() => _$ProductDtoToJson(this);
 }

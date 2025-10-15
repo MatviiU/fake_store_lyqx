@@ -8,6 +8,7 @@ import 'package:fake_store_lyqx/features/home/data/datasource/product_data_sourc
 import 'package:fake_store_lyqx/features/home/data/product_repository.dart';
 import 'package:fake_store_lyqx/features/home/data/repository/product_repository_impl.dart';
 import 'package:fake_store_lyqx/features/home/presentation/bloc/home_bloc.dart';
+import 'package:fake_store_lyqx/features/product_details/presentation/cubit/product_details_cubit.dart';
 import 'package:get_it/get_it.dart';
 
 final getIt = GetIt.instance;
@@ -37,5 +38,8 @@ void setupLocator() {
         productRepository: getIt<ProductRepository>(),
         authRepository: getIt<AuthRepository>(),
       ),
+    )
+    ..registerFactory<ProductDetailsCubit>(
+      () => ProductDetailsCubit(productRepository: getIt<ProductRepository>()),
     );
 }

@@ -70,7 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ).showSnackBar(const SnackBar(content: Text('Login Successful!')));
             context.goNamed(
               ScreenNames.home,
-              pathParameters: {'userId': state.user.id.toString()},
+              extra: state.user,
             );
           } else if (state is AuthFailure) {
             ScaffoldMessenger.of(
