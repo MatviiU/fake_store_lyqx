@@ -5,8 +5,16 @@ part 'address_dto.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class AddressDto {
-  const AddressDto({this.city, this.street, this.number, this.zipcode, this.geolocation});
-  factory AddressDto.fromJson(Map<String, dynamic> json) => _$AddressDtoFromJson(json);
+  const AddressDto({
+    this.city,
+    this.street,
+    this.number,
+    this.zipcode,
+    this.geolocation,
+  });
+
+  factory AddressDto.fromJson(Map<String, dynamic> json) =>
+      _$AddressDtoFromJson(json);
 
   final String? city;
   final String? street;

@@ -2,6 +2,7 @@ import 'package:fake_store_lyqx/core/di/get_it.dart';
 import 'package:fake_store_lyqx/core/navigation/app_router.dart';
 import 'package:fake_store_lyqx/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:fake_store_lyqx/features/cart/presentation/cubit/cart_cubit.dart';
+import 'package:fake_store_lyqx/features/favorites/presentation/cubit/favorites_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => getIt<AuthBloc>()),
         BlocProvider(create: (context) => getIt<CartCubit>()),
+        BlocProvider(create: (context) => getIt<FavoritesCubit>()),
       ],
       child: const AppView(),
     );
@@ -40,8 +42,10 @@ class AppView extends StatelessWidget {
       listener: (context, state) {
         if (state is AuthSuccess) {
           context.read<CartCubit>().getCart(userId: state.user.id);
+          context.read<FavoritesCubit>().getFavorites(userId: state.user.id);
         } else if (state is Unauthenticated) {
           context.read<CartCubit>().clearCart();
+          context.read<FavoritesCubit>().clearFavorites();
         }
       },
       child: MaterialApp.router(

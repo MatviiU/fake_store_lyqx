@@ -5,7 +5,9 @@ part 'geolocation_dto.g.dart';
 @JsonSerializable()
 class GeolocationDto {
   const GeolocationDto({this.lat, this.long});
-  factory GeolocationDto.fromJson(Map<String, dynamic> json) => _$GeolocationDtoFromJson(json);
+
+  factory GeolocationDto.fromJson(Map<String, dynamic> json) =>
+      _$GeolocationDtoFromJson(json);
 
   final String? lat;
   final String? long;

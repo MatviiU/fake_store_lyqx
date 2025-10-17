@@ -8,6 +8,9 @@ import 'package:fake_store_lyqx/features/cart/data/datasource/cart_local_data_so
 import 'package:fake_store_lyqx/features/cart/data/repository/cart_repository.dart';
 import 'package:fake_store_lyqx/features/cart/data/repository/cart_repository_impl.dart';
 import 'package:fake_store_lyqx/features/cart/presentation/cubit/cart_cubit.dart';
+import 'package:fake_store_lyqx/features/favorites/data/favorites_storage_service.dart';
+import 'package:fake_store_lyqx/features/favorites/data/favorites_storage_service_impl.dart';
+import 'package:fake_store_lyqx/features/favorites/presentation/cubit/favorites_cubit.dart';
 import 'package:fake_store_lyqx/features/home/data/datasource/network/product_api_service.dart';
 import 'package:fake_store_lyqx/features/home/data/datasource/product_data_source.dart';
 import 'package:fake_store_lyqx/features/home/data/product_repository.dart';
@@ -34,6 +37,11 @@ void setupLocator() {
     )
     ..registerLazySingleton<CartLocalDataSource>(
       () => CartLocalDataSource(sharedPreferences: getIt<SharedPreferences>()),
+    )
+    ..registerLazySingleton<FavoriteStorageService>(
+      () => FavoriteStorageServiceImpl(
+        sharedPreferences: getIt<SharedPreferences>(),
+      ),
     )
     ..registerLazySingleton<AuthRepository>(
       () => AuthRepositoryImpl(
@@ -62,5 +70,11 @@ void setupLocator() {
     )
     ..registerFactory<CartCubit>(
       () => CartCubit(cartRepository: getIt<CartRepository>()),
+    )
+    ..registerFactory<FavoritesCubit>(
+      () => FavoritesCubit(
+        favoriteStorageService: getIt<FavoriteStorageService>(),
+        productRepository: getIt<ProductRepository>(),
+      ),
     );
 }

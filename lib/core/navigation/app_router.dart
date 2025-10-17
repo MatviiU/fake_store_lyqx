@@ -3,6 +3,7 @@ import 'package:fake_store_lyqx/core/navigation/screen_names.dart';
 import 'package:fake_store_lyqx/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:fake_store_lyqx/features/auth/presentation/screens/login_screen.dart';
 import 'package:fake_store_lyqx/features/cart/presentation/screens/cart_screen.dart';
+import 'package:fake_store_lyqx/features/favorites/presentation/screens/favorites_screen.dart';
 import 'package:fake_store_lyqx/features/home/data/models/product_entity.dart';
 import 'package:fake_store_lyqx/features/home/presentation/bloc/home_bloc.dart';
 import 'package:fake_store_lyqx/features/home/presentation/screens/home_screen.dart';
@@ -72,11 +73,7 @@ class AppRouter {
               GoRoute(
                 path: '/favorites',
                 name: ScreenNames.favorites,
-                builder: (context, state) {
-                  return const Scaffold(
-                    body: Center(child: Text('Favorites Screen')),
-                  );
-                },
+                builder: (context, state) => const FavoritesScreen(),
               ),
             ],
           ),
