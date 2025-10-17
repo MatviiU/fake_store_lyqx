@@ -7,11 +7,4 @@ sealed class HomeEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-final class HomeDataRequested extends HomeEvent {
-  const HomeDataRequested({required this.user});
-
-  final User user;
-
-  @override
-  List<Object?> get props => [user];
-}
+final class HomeDataRequested extends HomeEvent {}

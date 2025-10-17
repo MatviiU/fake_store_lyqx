@@ -1,13 +1,18 @@
 import 'package:dio/dio.dart';
+import 'package:fake_store_lyqx/features/auth/data/auth_repository.dart';
 import 'package:fake_store_lyqx/features/home/data/datasource/product_data_source.dart';
 import 'package:fake_store_lyqx/features/home/data/models/product_entity.dart';
 import 'package:fake_store_lyqx/features/home/data/product_repository.dart';
 
 class ProductRepositoryImpl implements ProductRepository {
-  ProductRepositoryImpl({required ProductDataSource productDataSource})
-    : _productDataSource = productDataSource;
+  ProductRepositoryImpl({
+    required ProductDataSource productDataSource,
+    required AuthRepository authRepository,
+  }) : _productDataSource = productDataSource,
+       _authRepository = authRepository;
 
   final ProductDataSource _productDataSource;
+  final AuthRepository _authRepository;
 
   @override
   Future<ProductEntity> getProduct(int id) async {
@@ -25,6 +30,10 @@ class ProductRepositoryImpl implements ProductRepository {
   @override
   Future<List<ProductEntity>> getProducts() async {
     try {
+      final token = await _authRepository.getToken() as String?;
+      if (token == null) {
+        throw Exception('User is not authenticated');
+      }
       final products = await _productDataSource.getProducts();
       final entities = products.map(ProductEntity.fromDto).toList();
       return entities;

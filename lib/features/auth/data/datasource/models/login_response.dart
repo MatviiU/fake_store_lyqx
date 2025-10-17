@@ -9,7 +9,7 @@ class LoginResponse {
   factory LoginResponse.fromJson(Map<String, dynamic> json) =>
       _$LoginResponseFromJson(json);
 
-  final String token;
+  final String? token;
 
   Map<String, dynamic> toJson() => _$LoginResponseToJson(this);
 }

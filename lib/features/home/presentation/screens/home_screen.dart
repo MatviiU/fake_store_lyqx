@@ -18,7 +18,7 @@ class HomeScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  HomeHeader(user: state.user),
+                  const HomeHeader(),
                   const SizedBox(height: 30),
                   const Text(
                     'Fake Store',

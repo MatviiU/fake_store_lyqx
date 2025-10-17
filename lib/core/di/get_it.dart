@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:fake_store_lyqx/features/auth/data/auth_repository.dart';
+import 'package:fake_store_lyqx/features/auth/data/datasource/auth_data_source.dart';
+import 'package:fake_store_lyqx/features/auth/data/datasource/network/auth_api_service.dart';
 import 'package:fake_store_lyqx/features/auth/data/repository/auth_repository_impl.dart';
-import 'package:fake_store_lyqx/features/auth/datasource/auth_api_service.dart';
 import 'package:fake_store_lyqx/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:fake_store_lyqx/features/cart/data/datasource/cart_local_data_source.dart';
 import 'package:fake_store_lyqx/features/cart/data/repository/cart_repository.dart';
@@ -22,21 +23,29 @@ void setupLocator() {
   getIt
     ..registerLazySingleton<Dio>(Dio.new)
     ..registerLazySingleton<AuthApiService>(() => AuthApiService(getIt<Dio>()))
-    ..registerLazySingleton<AuthRepository>(
-      () => AuthRepositoryImpl(apiService: getIt<AuthApiService>()),
-    )
     ..registerLazySingleton<ProductApiService>(
       () => ProductApiService(getIt<Dio>()),
+    )
+    ..registerLazySingleton<AuthDataSource>(
+      () => AuthDataSource(authApiService: getIt<AuthApiService>()),
     )
     ..registerLazySingleton<ProductDataSource>(
       () => ProductDataSource(productApiService: getIt<ProductApiService>()),
     )
-    ..registerLazySingleton<ProductRepository>(
-      () =>
-          ProductRepositoryImpl(productDataSource: getIt<ProductDataSource>()),
-    )
     ..registerLazySingleton<CartLocalDataSource>(
       () => CartLocalDataSource(sharedPreferences: getIt<SharedPreferences>()),
+    )
+    ..registerLazySingleton<AuthRepository>(
+      () => AuthRepositoryImpl(
+        sharedPreferences: getIt<SharedPreferences>(),
+        authDataSource: getIt<AuthDataSource>(),
+      ),
+    )
+    ..registerLazySingleton<ProductRepository>(
+      () => ProductRepositoryImpl(
+        productDataSource: getIt<ProductDataSource>(),
+        authRepository: getIt<AuthRepository>(),
+      ),
     )
     ..registerLazySingleton<CartRepository>(
       () =>
