@@ -43,4 +43,24 @@ class ProductRepositoryImpl implements ProductRepository {
       throw Exception(e.toString());
     }
   }
+
+  @override
+  Future<List<ProductEntity>> getProductsByIds(List<int> ids) async {
+    if (ids.isEmpty) {
+      return [];
+    }
+    try {
+      final products = await _productDataSource.getProducts();
+      final favoritesIds = ids.toSet();
+      final favoritesProducts = products
+          .where((product) => favoritesIds.contains(product.id))
+          .toList();
+      final entities = favoritesProducts.map(ProductEntity.fromDto).toList();
+      return entities;
+    } on DioException catch (e) {
+      throw Exception(e.message);
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
 }
