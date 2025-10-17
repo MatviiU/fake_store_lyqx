@@ -3,8 +3,7 @@ import 'package:fake_store_lyqx/features/auth/data/auth_repository.dart';
 import 'package:fake_store_lyqx/features/auth/data/repository/auth_repository_impl.dart';
 import 'package:fake_store_lyqx/features/auth/datasource/auth_api_service.dart';
 import 'package:fake_store_lyqx/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:fake_store_lyqx/features/cart/data/datasource/cart_data_source.dart';
-import 'package:fake_store_lyqx/features/cart/data/datasource/network/cart_api_service.dart';
+import 'package:fake_store_lyqx/features/cart/data/datasource/cart_local_data_source.dart';
 import 'package:fake_store_lyqx/features/cart/data/repository/cart_repository.dart';
 import 'package:fake_store_lyqx/features/cart/data/repository/cart_repository_impl.dart';
 import 'package:fake_store_lyqx/features/cart/presentation/cubit/cart_cubit.dart';
@@ -15,6 +14,7 @@ import 'package:fake_store_lyqx/features/home/data/repository/product_repository
 import 'package:fake_store_lyqx/features/home/presentation/bloc/home_bloc.dart';
 import 'package:fake_store_lyqx/features/product_details/presentation/cubit/product_details_cubit.dart';
 import 'package:get_it/get_it.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 final getIt = GetIt.instance;
 
@@ -28,22 +28,19 @@ void setupLocator() {
     ..registerLazySingleton<ProductApiService>(
       () => ProductApiService(getIt<Dio>()),
     )
-    ..registerLazySingleton<CartApiService>(() => CartApiService(getIt<Dio>()))
     ..registerLazySingleton<ProductDataSource>(
       () => ProductDataSource(productApiService: getIt<ProductApiService>()),
-    )
-    ..registerLazySingleton<CartDataSource>(
-      () => CartDataSource(cartApiService: getIt<CartApiService>()),
     )
     ..registerLazySingleton<ProductRepository>(
       () =>
           ProductRepositoryImpl(productDataSource: getIt<ProductDataSource>()),
     )
+    ..registerLazySingleton<CartLocalDataSource>(
+      () => CartLocalDataSource(sharedPreferences: getIt<SharedPreferences>()),
+    )
     ..registerLazySingleton<CartRepository>(
-      () => CartRepositoryImpl(
-        cartDataSource: getIt<CartDataSource>(),
-        productDataSource: getIt<ProductDataSource>(),
-      ),
+      () =>
+          CartRepositoryImpl(cartLocalDataSource: getIt<CartLocalDataSource>()),
     )
     ..registerFactory<AuthBloc>(
       () => AuthBloc(authRepository: getIt<AuthRepository>()),

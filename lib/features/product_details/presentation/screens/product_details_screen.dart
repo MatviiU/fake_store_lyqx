@@ -1,5 +1,7 @@
+import 'package:fake_store_lyqx/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:fake_store_lyqx/features/home/data/models/product_entity.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
   const ProductDetailsScreen({required this.product, super.key});
@@ -161,7 +163,7 @@ class ProductDetailsScreen extends StatelessWidget {
                 const Spacer(),
                 ElevatedButton(
                   onPressed: () {
-                    //here must be add to cart func
+                    context.read<CartCubit>().addItem(product);
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF1E1E1E),
@@ -170,10 +172,7 @@ class ProductDetailsScreen extends StatelessWidget {
                     ),
                   ),
                   child: const Padding(
-                    padding: EdgeInsets.symmetric(
-                      vertical: 14,
-                      horizontal: 24,
-                    ),
+                    padding: EdgeInsets.symmetric(vertical: 14, horizontal: 24),
                     child: Text(
                       'Add to cart',
                       textAlign: TextAlign.center,

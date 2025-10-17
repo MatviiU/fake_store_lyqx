@@ -1,9 +1,7 @@
 import 'package:fake_store_lyqx/core/di/get_it.dart';
 import 'package:fake_store_lyqx/core/navigation/screen_names.dart';
 import 'package:fake_store_lyqx/features/auth/data/models/user.dart';
-import 'package:fake_store_lyqx/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:fake_store_lyqx/features/auth/presentation/screens/login_screen.dart';
-import 'package:fake_store_lyqx/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:fake_store_lyqx/features/cart/presentation/screens/cart_screen.dart';
 import 'package:fake_store_lyqx/features/home/data/models/product_entity.dart';
 import 'package:fake_store_lyqx/features/home/presentation/bloc/home_bloc.dart';
@@ -84,15 +82,7 @@ final router = GoRouter(
             GoRoute(
               path: '/cart',
               name: ScreenNames.cart,
-              builder: (context, state) {
-                final authState = context.read<AuthBloc>().state as AuthSuccess;
-                final userId = authState.user.id;
-                return BlocProvider(
-                  create: (context) =>
-                      getIt<CartCubit>()..getCartDetails(userId),
-                  child: const CartScreen(),
-                );
-              },
+              builder: (context, state) => const CartScreen(),
             ),
           ],
         ),

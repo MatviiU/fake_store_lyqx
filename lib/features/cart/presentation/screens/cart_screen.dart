@@ -1,38 +1,27 @@
-import 'package:fake_store_lyqx/features/cart/data/repository/models/cart_item_entity.dart';
 import 'package:fake_store_lyqx/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:fake_store_lyqx/features/cart/presentation/cubit/cart_state.dart';
 import 'package:fake_store_lyqx/features/cart/presentation/widgets/cart_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<CartCubit, CartState>(
-      listener: (context, state) {
-        if (state is CartDeleted) {
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(const SnackBar(content: Text('Cart deleted')));
-          context.pop();
-        }
-      },
+    return BlocBuilder<CartCubit, CartState>(
       builder: (context, state) {
-        return switch (state) {
-          CartInitial() ||
-          CartLoading() ||
-          CartDeleted() => const Center(child: CircularProgressIndicator()),
-          CartLoaded() => Scaffold(
-            body: SafeArea(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 24,
-                  vertical: 35,
+        return Scaffold(
+          body: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 35),
+              child: switch (state) {
+                CartInitial() || CartLoading() => const Center(
+                  child: CircularProgressIndicator(),
                 ),
-                child: Column(
+
+                CartError() => Center(child: Text(state.message)),
+                CartLoaded() => Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
@@ -85,26 +74,31 @@ class CartScreen extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 30),
+                    if (state.items.isEmpty)
+                      const Expanded(
+                        child: Center(
+                          child: Text(
+                            'Your cart is empty',
+                            style: TextStyle(fontSize: 18, color: Colors.grey),
+                          ),
+                        ),
+                      ),
                     Expanded(
                       child: ListView.separated(
                         itemBuilder: (context, index) {
                           final item = state.items[index];
                           return CartItem(
                             cartItemEntity: item,
-                            onRemove: () => _updateQuantity(
-                              context: context,
-                              cartId: state.cartId,
-                              userId: state.userId,
-                              item: item,
-                              newQuantity: item.quantity - 1,
-                            ),
-                            onAdd: () => _updateQuantity(
-                              context: context,
-                              cartId: state.cartId,
-                              userId: state.userId,
-                              item: item,
-                              newQuantity: item.quantity + 1,
-                            ),
+                            onRemove: () =>
+                                context.read<CartCubit>().updateQuantity(
+                                  productId: item.product.id,
+                                  newQuantity: item.quantity - 1,
+                                ),
+                            onAdd: () =>
+                                context.read<CartCubit>().updateQuantity(
+                                  productId: item.product.id,
+                                  newQuantity: item.quantity + 1,
+                                ),
                           );
                         },
                         separatorBuilder: (context, index) =>
@@ -114,27 +108,11 @@ class CartScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-              ),
+              },
             ),
           ),
-          CartError() => throw UnimplementedError(),
-        };
+        );
       },
-    );
-  }
-
-  void _updateQuantity({
-    required BuildContext context,
-    required int cartId,
-    required int userId,
-    required CartItemEntity item,
-    required int newQuantity,
-  }) {
-    context.read<CartCubit>().updateItemQuantity(
-      cartId: cartId,
-      userId: userId,
-      productId: item.product.id,
-      newQuantity: newQuantity,
     );
   }
 }

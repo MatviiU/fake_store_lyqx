@@ -1,5 +1,9 @@
 import 'package:fake_store_lyqx/features/home/data/datasource/models/product_dto.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+part 'product_entity.g.dart';
+
+@JsonSerializable()
 class ProductEntity {
   const ProductEntity({
     required this.id,
@@ -11,6 +15,10 @@ class ProductEntity {
     required this.description,
     required this.category,
   });
+
+  factory ProductEntity.fromJson(Map<String, dynamic> json) =>
+      _$ProductEntityFromJson(json);
+
 
   factory ProductEntity.fromDto(ProductDto dto) {
     return ProductEntity(
@@ -33,4 +41,6 @@ class ProductEntity {
   final double rate;
   final String description;
   final String category;
+
+  Map<String, dynamic> toJson() => _$ProductEntityToJson(this);
 }
