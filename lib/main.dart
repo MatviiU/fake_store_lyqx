@@ -1,9 +1,16 @@
 import 'package:fake_store_lyqx/core/di/get_it.dart';
 import 'package:fake_store_lyqx/core/navigation/app_router.dart';
+import 'package:fake_store_lyqx/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:fake_store_lyqx/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   setupLocator();
+  final prefs = await SharedPreferences.getInstance();
+  getIt.registerSingleton<SharedPreferences>(prefs);
   runApp(const MyApp());
 }
 
@@ -12,6 +19,21 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(title: 'Fake Store', routerConfig: router);
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => getIt<AuthBloc>()),
+        BlocProvider(create: (context) => getIt<CartCubit>()),
+      ],
+      child: BlocListener<AuthBloc, AuthState>(
+        listener: (context, state) {
+          if (state is AuthSuccess) {
+            context.read<CartCubit>().getCart(userId: state.user.id);
+          } else {
+            context.read<CartCubit>().clearCart();
+          }
+        },
+        child: MaterialApp.router(title: 'Fake Store', routerConfig: router),
+      ),
+    );
   }
 }
