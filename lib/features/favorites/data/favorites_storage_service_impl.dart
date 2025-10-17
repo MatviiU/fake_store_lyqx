@@ -19,7 +19,7 @@ class FavoriteStorageServiceImpl implements FavoriteStorageService {
   }
 
   @override
-  Future<List<int>> getFavorites(int userId) async {
+  Future<List<int>> getFavorites({required int userId}) async {
     final stringIds = _sharedPreferences.getStringList(
       _getFavoritesKey(userId),
     );
@@ -27,23 +27,5 @@ class FavoriteStorageServiceImpl implements FavoriteStorageService {
       return [];
     }
     return stringIds.map(int.parse).toList();
-  }
-
-  @override
-  Future<void> addFavorite({required int id, required int userId}) async {
-    final favorites = await getFavorites(userId);
-    if (!favorites.contains(id)) {
-      favorites.add(id);
-      await saveFavorites(ids: favorites, userId: userId);
-    }
-  }
-
-  @override
-  Future<void> removeFavorite({required int id, required int userId}) async {
-    final favorites = await getFavorites(userId);
-    if (favorites.contains(id)) {
-      favorites.remove(id);
-      await saveFavorites(ids: favorites, userId: userId);
-    }
   }
 }

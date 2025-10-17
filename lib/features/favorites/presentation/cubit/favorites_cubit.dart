@@ -24,7 +24,9 @@ class FavoritesCubit extends Cubit<FavoritesState> {
     emit(FavoritesLoading());
     try {
       _currentUserId = userId;
-      final favoritesIds = await _favoriteStorageService.getFavorites(userId);
+      final favoritesIds = await _favoriteStorageService.getFavorites(
+        userId: userId,
+      );
       final products = await _productRepository.getProductsByIds(favoritesIds);
       emit(FavoritesLoaded(favoritesIds: favoritesIds, products: products));
     } catch (e) {
@@ -98,5 +100,10 @@ class FavoritesCubit extends Cubit<FavoritesState> {
     } catch (e) {
       emit(FavoritesError(message: e.toString()));
     }
+  }
+
+  void clearFavorites() {
+    if (_currentUserId == null) return;
+    _updateAndSaveFavorites(products: [], favoritesIds: []);
   }
 }

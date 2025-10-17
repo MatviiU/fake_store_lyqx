@@ -1,4 +1,5 @@
 import 'package:fake_store_lyqx/core/navigation/screen_names.dart';
+import 'package:fake_store_lyqx/features/favorites/presentation/widgets/favorite_button.dart';
 import 'package:fake_store_lyqx/features/home/data/models/product_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -76,17 +77,7 @@ class ProductListItem extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(width: 8),
-                        SizedBox(
-                          width: 24,
-                          height: 24,
-                          child: IconButton(
-                            onPressed: () {
-                              //here must be favorite func
-                            },
-                            padding: EdgeInsets.zero,
-                            icon: const Icon(Icons.favorite_border, size: 20),
-                          ),
-                        ),
+                        FavoriteButton(productId: product.id),
                       ],
                     ),
                     const SizedBox(height: 8),

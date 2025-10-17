@@ -1,4 +1,6 @@
 import 'package:fake_store_lyqx/features/cart/presentation/cubit/cart_cubit.dart';
+import 'package:fake_store_lyqx/features/cart/presentation/cubit/cart_state.dart';
+import 'package:fake_store_lyqx/features/favorites/presentation/widgets/favorite_button.dart';
 import 'package:fake_store_lyqx/features/home/data/models/product_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,17 +13,7 @@ class ProductDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        actions: [
-          IconButton(
-            onPressed: () {
-              //here must be favorite func
-            },
-            padding: EdgeInsets.zero,
-            icon: const Icon(Icons.favorite_border, size: 20),
-          ),
-        ],
-      ),
+      appBar: AppBar(actions: [FavoriteButton(productId: product.id)]),
       body: Column(
         children: [
           Expanded(
@@ -161,29 +153,52 @@ class ProductDetailsScreen extends StatelessWidget {
                   ],
                 ),
                 const Spacer(),
-                ElevatedButton(
-                  onPressed: () {
-                    context.read<CartCubit>().addItem(product);
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF1E1E1E),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(6),
-                    ),
-                  ),
-                  child: const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 14, horizontal: 24),
-                    child: Text(
-                      'Add to cart',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontFamily: 'Urbanist',
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white,
+                BlocBuilder<CartCubit, CartState>(
+                  builder: (context, state) {
+                    var inCart = false;
+                    if (state is CartLoaded) {
+                      inCart = state.items.any(
+                        (item) => item.product.id == product.id,
+                      );
+                    }
+
+                    return ElevatedButton(
+                      onPressed: inCart
+                          ? null
+                          : () => context.read<CartCubit>().addItem(product),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: inCart
+                            ? Colors.white
+                            : Colors.black,
+                        foregroundColor: inCart
+                            ? Colors.black
+                            : Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 8,
+                        ),
+                        minimumSize: const Size(0, 36),
                       ),
-                    ),
-                  ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 14,
+                          horizontal: 24,
+                        ),
+                        child: Text(
+                          inCart ? 'In Cart' : 'Add to cart',
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                            fontFamily: 'Urbanist',
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    );
+                  },
                 ),
               ],
             ),
