@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:fake_store_lyqx/features/cart/data/repository/models/cart_entity.dart';
+import 'package:fake_store_lyqx/features/cart/data/repository/models/cart_item_entity.dart';
 
 sealed class CartState extends Equatable {
   const CartState();
@@ -13,12 +13,18 @@ final class CartInitial extends CartState {}
 final class CartLoading extends CartState {}
 
 final class CartLoaded extends CartState {
-  const CartLoaded({required this.cart});
+  const CartLoaded({
+    required this.items,
+    required this.userId,
+    required this.cartId,
+  });
 
-  final CartEntity cart;
+  final List<CartItemEntity> items;
+  final int userId;
+  final int cartId;
 
   @override
-  List<Object> get props => [cart];
+  List<Object> get props => [items];
 }
 
 final class CartDeleted extends CartState {}

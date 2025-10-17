@@ -23,6 +23,14 @@ class CartDataSource {
     }
   }
 
+  Future<CartDto> updateCart(int id, CartDto cart) {
+    try {
+      return _cartApiService.updateCart(id, cart);
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
   Future<void> deleteCart(int id) {
     try {
       return _cartApiService.deleteCart(id);

@@ -1,6 +1,8 @@
 import 'package:fake_store_lyqx/core/di/get_it.dart';
 import 'package:fake_store_lyqx/core/navigation/app_router.dart';
+import 'package:fake_store_lyqx/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
   setupLocator();
@@ -12,6 +14,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(title: 'Fake Store', routerConfig: router);
+    return BlocProvider(
+      create: (context) => getIt<AuthBloc>(),
+      child: MaterialApp.router(title: 'Fake Store', routerConfig: router),
+    );
   }
 }

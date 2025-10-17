@@ -15,6 +15,9 @@ abstract class CartApiService {
   @POST('/carts')
   Future<CartDto> createCart(@Body() CartDto cart);
 
+  @PUT('/carts/{id}')
+  Future<CartDto> updateCart(@Path('id') int id, @Body() CartDto cart);
+
   @DELETE('/carts/{id}')
   Future<void> deleteCart(@Path('id') int id);
 }
