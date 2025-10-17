@@ -24,15 +24,29 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => getIt<AuthBloc>()),
         BlocProvider(create: (context) => getIt<CartCubit>()),
       ],
-      child: BlocListener<AuthBloc, AuthState>(
-        listener: (context, state) {
-          if (state is AuthSuccess) {
-            context.read<CartCubit>().getCart(userId: state.user.id);
-          } else {
-            context.read<CartCubit>().clearCart();
-          }
-        },
-        child: MaterialApp.router(title: 'Fake Store', routerConfig: router),
+      child: const AppView(),
+    );
+  }
+}
+
+class AppView extends StatelessWidget {
+  const AppView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final appRouter = AppRouter(authBloc: context.read<AuthBloc>());
+
+    return BlocListener<AuthBloc, AuthState>(
+      listener: (context, state) {
+        if (state is AuthSuccess) {
+          context.read<CartCubit>().getCart(userId: state.user.id);
+        } else if (state is Unauthenticated) {
+          context.read<CartCubit>().clearCart();
+        }
+      },
+      child: MaterialApp.router(
+        title: 'Fake Store',
+        routerConfig: appRouter.router,
       ),
     );
   }

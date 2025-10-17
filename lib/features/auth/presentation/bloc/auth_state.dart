@@ -15,11 +15,13 @@ final class AuthSuccess extends AuthState {
   const AuthSuccess({required this.token, required this.user});
 
   final String token;
-  final User user;
+  final UserEntity user;
 
   @override
   List<Object?> get props => [token, user];
 }
+
+final class Unauthenticated extends AuthState {}
 
 final class AuthFailure extends AuthState {
   const AuthFailure({required this.message});

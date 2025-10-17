@@ -12,13 +12,12 @@ final class HomeInitial extends HomeState {}
 final class HomeLoading extends HomeState {}
 
 final class HomeLoaded extends HomeState {
-  const HomeLoaded({required this.user, required this.products});
+  const HomeLoaded({required this.products});
 
   final List<ProductEntity> products;
-  final User user;
 
   @override
-  List<Object> get props => [products, user];
+  List<Object> get props => [products];
 }
 
 final class HomeError extends HomeState {
