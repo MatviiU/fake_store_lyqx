@@ -43,10 +43,11 @@ class AppView extends StatelessWidget {
         if (state is AuthSuccess) {
           context.read<CartCubit>().getCart(userId: state.user.id);
           context.read<FavoritesCubit>().getFavorites(userId: state.user.id);
-        } else if (state is Unauthenticated) {
-          context.read<CartCubit>().clearCart();
-          context.read<FavoritesCubit>().clearFavorites();
         }
+        // else if (state is Unauthenticated) {
+        //   context.read<CartCubit>().clearCart();
+        //   context.read<FavoritesCubit>().clearFavorites();
+        // }
       },
       child: MaterialApp.router(
         title: 'Fake Store',
