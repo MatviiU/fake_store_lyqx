@@ -1,5 +1,5 @@
 import 'package:fake_store_lyqx/features/favorites/presentation/widgets/favorites_list_item.dart';
-import 'package:fake_store_lyqx/features/home/data/models/product_entity.dart';
+import 'package:fake_store_lyqx/features/home/data/repository/models/product_entity.dart';
 import 'package:flutter/material.dart';
 
 class FavoritesListWidget extends StatelessWidget {

@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:fake_store_lyqx/features/auth/data/auth_repository.dart';
 import 'package:fake_store_lyqx/features/auth/data/datasource/auth_data_source.dart';
 import 'package:fake_store_lyqx/features/auth/data/datasource/models/login_response.dart';
+import 'package:fake_store_lyqx/features/auth/data/repository/auth_repository.dart';
 import 'package:fake_store_lyqx/features/auth/data/repository/models/user_entity.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

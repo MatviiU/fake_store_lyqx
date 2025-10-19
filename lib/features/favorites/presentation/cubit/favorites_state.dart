@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:fake_store_lyqx/features/home/data/models/product_entity.dart';
+import 'package:fake_store_lyqx/features/home/data/repository/models/product_entity.dart';
 
 sealed class FavoritesState extends Equatable {
   const FavoritesState();

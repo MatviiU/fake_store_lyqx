@@ -2,7 +2,7 @@ import 'package:fake_store_lyqx/core/navigation/screen_names.dart';
 import 'package:fake_store_lyqx/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:fake_store_lyqx/features/cart/presentation/cubit/cart_state.dart';
 import 'package:fake_store_lyqx/features/favorites/presentation/widgets/favorite_button.dart';
-import 'package:fake_store_lyqx/features/home/data/models/product_entity.dart';
+import 'package:fake_store_lyqx/features/home/data/repository/models/product_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';

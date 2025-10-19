@@ -4,7 +4,7 @@ import 'package:fake_store_lyqx/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:fake_store_lyqx/features/auth/presentation/screens/login_screen.dart';
 import 'package:fake_store_lyqx/features/cart/presentation/screens/cart_screen.dart';
 import 'package:fake_store_lyqx/features/favorites/presentation/screens/favorites_screen.dart';
-import 'package:fake_store_lyqx/features/home/data/models/product_entity.dart';
+import 'package:fake_store_lyqx/features/home/data/repository/models/product_entity.dart';
 import 'package:fake_store_lyqx/features/home/presentation/bloc/home_bloc.dart';
 import 'package:fake_store_lyqx/features/home/presentation/screens/home_screen.dart';
 import 'package:fake_store_lyqx/features/home/presentation/screens/main_shell.dart';

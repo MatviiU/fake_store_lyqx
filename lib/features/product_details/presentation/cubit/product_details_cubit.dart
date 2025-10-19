@@ -1,4 +1,4 @@
-import 'package:fake_store_lyqx/features/home/data/product_repository.dart';
+import 'package:fake_store_lyqx/features/home/data/repository/product_repository.dart';
 import 'package:fake_store_lyqx/features/product_details/presentation/cubit/product_details_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

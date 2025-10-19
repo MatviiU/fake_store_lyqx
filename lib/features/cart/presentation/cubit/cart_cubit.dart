@@ -1,7 +1,7 @@
 import 'package:fake_store_lyqx/features/cart/data/repository/cart_repository.dart';
 import 'package:fake_store_lyqx/features/cart/data/repository/models/cart_item_entity.dart';
 import 'package:fake_store_lyqx/features/cart/presentation/cubit/cart_state.dart';
-import 'package:fake_store_lyqx/features/home/data/models/product_entity.dart';
+import 'package:fake_store_lyqx/features/home/data/repository/models/product_entity.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CartCubit extends Cubit<CartState> {

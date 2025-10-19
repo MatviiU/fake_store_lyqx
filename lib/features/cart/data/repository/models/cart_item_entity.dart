@@ -1,4 +1,4 @@
-import 'package:fake_store_lyqx/features/home/data/models/product_entity.dart';
+import 'package:fake_store_lyqx/features/home/data/repository/models/product_entity.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'cart_item_entity.g.dart';

@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
-import 'package:fake_store_lyqx/features/home/data/models/product_entity.dart';
-import 'package:fake_store_lyqx/features/home/data/product_repository.dart';
+import 'package:fake_store_lyqx/features/home/data/repository/models/product_entity.dart';
+import 'package:fake_store_lyqx/features/home/data/repository/product_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'home_event.dart';

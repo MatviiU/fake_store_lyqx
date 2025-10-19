@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:fake_store_lyqx/features/auth/data/auth_repository.dart';
+import 'package:fake_store_lyqx/features/auth/data/repository/auth_repository.dart';
 import 'package:fake_store_lyqx/features/auth/data/repository/models/user_entity.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';

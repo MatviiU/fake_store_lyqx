@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:fake_store_lyqx/features/auth/data/auth_repository.dart';
 import 'package:fake_store_lyqx/features/auth/data/datasource/auth_data_source.dart';
 import 'package:fake_store_lyqx/features/auth/data/datasource/network/auth_api_service.dart';
+import 'package:fake_store_lyqx/features/auth/data/repository/auth_repository.dart';
 import 'package:fake_store_lyqx/features/auth/data/repository/auth_repository_impl.dart';
 import 'package:fake_store_lyqx/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:fake_store_lyqx/features/cart/data/datasource/cart_local_data_source.dart';
@@ -13,7 +13,7 @@ import 'package:fake_store_lyqx/features/favorites/data/favorites_storage_servic
 import 'package:fake_store_lyqx/features/favorites/presentation/cubit/favorites_cubit.dart';
 import 'package:fake_store_lyqx/features/home/data/datasource/network/product_api_service.dart';
 import 'package:fake_store_lyqx/features/home/data/datasource/product_data_source.dart';
-import 'package:fake_store_lyqx/features/home/data/product_repository.dart';
+import 'package:fake_store_lyqx/features/home/data/repository/product_repository.dart';
 import 'package:fake_store_lyqx/features/home/data/repository/product_repository_impl.dart';
 import 'package:fake_store_lyqx/features/home/presentation/bloc/home_bloc.dart';
 import 'package:fake_store_lyqx/features/product_details/presentation/cubit/product_details_cubit.dart';

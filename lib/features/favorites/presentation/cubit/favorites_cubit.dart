@@ -1,7 +1,7 @@
 import 'package:fake_store_lyqx/features/favorites/data/favorites_storage_service.dart';
 import 'package:fake_store_lyqx/features/favorites/presentation/cubit/favorites_state.dart';
-import 'package:fake_store_lyqx/features/home/data/models/product_entity.dart';
-import 'package:fake_store_lyqx/features/home/data/product_repository.dart';
+import 'package:fake_store_lyqx/features/home/data/repository/models/product_entity.dart';
+import 'package:fake_store_lyqx/features/home/data/repository/product_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FavoritesCubit extends Cubit<FavoritesState> {

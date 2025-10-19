@@ -1,4 +1,4 @@
-import 'package:fake_store_lyqx/features/home/data/models/product_entity.dart';
+import 'package:fake_store_lyqx/features/home/data/repository/models/product_entity.dart';
 import 'package:fake_store_lyqx/features/home/presentation/widgets/product_list_item.dart';
 import 'package:flutter/material.dart';
 
